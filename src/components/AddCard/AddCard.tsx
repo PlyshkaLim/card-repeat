@@ -5,7 +5,7 @@ import {Link} from "react-router-dom";
 
 const AddCard: React.FC<any> = (props: any) => {
   const cardList = props.cardBase;
-  const [selectedOption, setSelectedOption] = useState<number>(cardList[0].id);
+  const [selectedOption, setSelectedOption] = useState<number>(0);
   const [currentQuestion, setCurrentQuestion] = useState<string>('');
   const [currentAnswer, setCurrentAnswer] = useState<string>('');
 
@@ -22,10 +22,16 @@ const AddCard: React.FC<any> = (props: any) => {
     setCurrentAnswer(event.target.value);
   }
 
+  function getRandomId() {
+    const min = 0;
+    const max = 10000;
+    return Math.trunc(min + Math.random() * (max - min));
+  }
+
   function addNewCard() {
     cardList[selectedOption].questions.push(
       {
-        id: cardList[selectedOption].id + 1,
+        id: getRandomId(),
         question: currentQuestion,
         answer: currentAnswer,
         date: 0

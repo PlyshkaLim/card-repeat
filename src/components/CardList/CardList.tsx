@@ -4,13 +4,17 @@ import {CurrentListIdContext} from "../../App";
 import cn from "classnames";
 import './CardList.css';
 
-
 const CardList: React.FC<any> = (props: any) => {
   const {dispatchChangeCurrentListId} = useContext(CurrentListIdContext);
   const cardList = props.cardBase;
 
   function changeCurListId(listId: number) {
     dispatchChangeCurrentListId(listId);
+  }
+
+  function deleteCurrentGroup(listId: number) {
+    props.setCardBase(cardList.filter((i: any) => i.id !== listId));
+    localStorage.setItem('CardBase', JSON.stringify(cardList.filter((i: any) => i.id === listId)));
   }
 
   return (
@@ -47,6 +51,9 @@ const CardList: React.FC<any> = (props: any) => {
               К вопросам
             </button>
           </Link>
+          <button onClick={() => deleteCurrentGroup(list.id)}>
+            Удалить группу
+          </button>
         </div>)}
     </div>
   )

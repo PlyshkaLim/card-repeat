@@ -7,7 +7,8 @@ import { CurrentListIdContext} from "../../App";
 const Card: React.FC<any> = (props: any) => {
   const {CurrentListId} = useContext(CurrentListIdContext);
   const cardList = props.cardBase;
-  let questions = cardList[CurrentListId].questions;
+  const currentList = cardList.filter((i: any) => i.id === CurrentListId)[0];
+  let questions = currentList.questions;
 
   const [currentAnswer, setCurrentAnswer] = useState<string>('');
   const [isQuestion, setIQuestion] = useState<boolean>(true);
@@ -41,13 +42,13 @@ const Card: React.FC<any> = (props: any) => {
   }
 
   const answerCorrect = () => {
-    cardList[CurrentListId].statistic.correctAnswers += 1;
+    currentList.statistic.correctAnswers += 1;
     questions.map((q: any) => q.id === idQuestion ? q.date += 2 : q.date)
     setIQuestion(true);
   }
 
   const answerIncorrect = () => {
-    cardList[CurrentListId].statistic.incorrectAnswers += 1;
+    currentList.statistic.incorrectAnswers += 1;
     questions.map((q: any) => q.id === idQuestion ? q.date += 1 : q.date)
     setIQuestion(true);
   }

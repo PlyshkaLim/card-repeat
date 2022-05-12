@@ -7,7 +7,19 @@ import cn from "classnames";
 const QuestionsList: React.FC<any> = (props: any) => {
   const {CurrentListId} = useContext(CurrentListIdContext);
   const cardList = props.cardBase;
-  const cardName = cardList[CurrentListId].name;
+  const currentCard = cardList.filter((i: any) => i.id === CurrentListId)[0];
+  const cardName = currentCard.name;
+
+  function deleteCard(cardId: number) {
+    for (let i = 0; i < cardList.length; i++) {
+      if (cardList[i].id === CurrentListId) {
+        cardList[i].questions = currentCard.questions.filter((i: any) => i.id !== cardId);
+        cardList[i].statistic.questionsCount -= 1;
+      }
+    }
+    props.setCardBase(cardList);
+    localStorage.setItem('CardBase', JSON.stringify(cardList));
+  }
 
   return (
     <div className={cn('questions_list_wrapper')}>
@@ -16,13 +28,19 @@ const QuestionsList: React.FC<any> = (props: any) => {
           Список вопросов в группе - {cardName}
         </div>
         <div>
-          {cardList[CurrentListId].questions.map((item: any, id: any) =>
+          {currentCard.questions.map((item: any, id: any) =>
             <div key={id} className={cn('card_item')}>
               <div>
                 {item.question}
               </div>
               <div>
+                <button>Изменить</button>
+              </div>
+              <div>
                 {item.answer}
+              </div>
+              <div>
+                <button onClick={() => deleteCard(item.id)}>Удалить</button>
               </div>
             </div>
           )}

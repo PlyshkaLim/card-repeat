@@ -11,10 +11,16 @@ const AddGroup: React.FC<any> = (props: any) => {
     setCurrentGroupName(event.target.value);
   }
 
+  function getRandomId() {
+    const min = 0;
+    const max = 10000;
+    return Math.trunc(min + Math.random() * (max - min));
+  }
+
   function addNewGroupName() {
     cardList.push(
       {
-        id: 0,
+        id: getRandomId(),
         name: currentGroupName,
         questions: [],
         statistic: {

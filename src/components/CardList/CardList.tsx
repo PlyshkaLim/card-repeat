@@ -36,9 +36,9 @@ const CardList: React.FC<any> = (props: any) => {
           <div>
             Количество карточек: {list.statistic.questionsCount}
           </div>
-          <Link to={`/card/${list.id}/statistics`}>
+          <Link to={`/card/${list.id}`}>
             <button onClick={() => changeCurListId(list.id)}>
-              Статистика
+              К вопросам
             </button>
           </Link>
           <Link to={`/card/${list.id}/questions_list`}>
@@ -46,14 +46,16 @@ const CardList: React.FC<any> = (props: any) => {
               Список вопросов
             </button>
           </Link>
-          <Link to={`/card/${list.id}`}>
+          <Link to={`/card/${list.id}/statistics`}>
             <button onClick={() => changeCurListId(list.id)}>
-              К вопросам
+              Статистика
             </button>
           </Link>
-          <button onClick={() => deleteCurrentGroup(list.id)}>
-            Удалить группу
-          </button>
+          <div>
+            <button onClick={() => deleteCurrentGroup(list.id)}>
+              Удалить группу
+            </button>
+          </div>
         </div>)}
     </div>
   )

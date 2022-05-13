@@ -17,6 +17,22 @@ export const CurrentListIdContext = React.createContext<any>({
   }
 });
 
+type CardListType = {
+  id: number,
+  name: string,
+  questions: {
+    id: number,
+    question: string,
+    answer: string,
+    date: number
+  },
+  statistic: {
+    questionsCount: number,
+    correctAnswers: number,
+    incorrectAnswers: number
+  }
+}
+
 const App: React.FC = () => {
   const [cardBase, setCardBase] = useState<any[]>(loadState('CardBase', []));
   const [currentListId, setCurrentListId] = useState<number>(0);

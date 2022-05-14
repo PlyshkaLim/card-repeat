@@ -4,8 +4,15 @@ import cn from "classnames";
 import './AddGroup.css';
 
 const AddGroup: React.FC<any> = (props: any) => {
+  const emptyCard = {
+    id: getRandomId(),
+    question: '',
+    answer: '',
+    date: 0
+  };
   const cardList = props.cardBase;
   const [currentGroupName, setCurrentGroupName] = useState<string>('');
+  const [newQuestionsList, setNewQuestionsList] = useState<any>([]);
 
   function handleChange(event: any) {
     setCurrentGroupName(event.target.value);
@@ -34,6 +41,15 @@ const AddGroup: React.FC<any> = (props: any) => {
     setCurrentGroupName('');
   }
 
+  function addNewCard() {
+    const newList = newQuestionsList;
+    newList.push(emptyCard);
+    console.log('newList    ', newList);
+    setNewQuestionsList(newList);
+    console.log('newQuestionsList   ', newQuestionsList);
+  }
+
+  console.log('newQuestionsList   ', newQuestionsList);
   return (
     <div className={cn('add_group')}>
       <div className={cn('add_group_content')}>
@@ -41,6 +57,19 @@ const AddGroup: React.FC<any> = (props: any) => {
         Добавить новую группу
       </span>
         <input value={currentGroupName} onChange={handleChange}/>
+        <button onClick={addNewCard}>Новая карточка</button>
+
+        {
+          newQuestionsList.length !== 0
+            ?
+            <div>
+              {newQuestionsList.map((item: any) =>
+                <div>1</div>
+              )}
+            </div>
+            :
+            <div>Добавьте новые карточки!</div>
+        }
         <button onClick={addNewGroupName}>Добавить</button>
         <Link to={'/'}>
           <button>К папкам</button>

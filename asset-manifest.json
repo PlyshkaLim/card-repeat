@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/card-repeat/static/css/main.048b5357.css",
+    "main.js": "/card-repeat/static/js/main.0dcc4dae.js",
+    "index.html": "/card-repeat/index.html",
+    "main.048b5357.css.map": "/card-repeat/static/css/main.048b5357.css.map",
+    "main.0dcc4dae.js.map": "/card-repeat/static/js/main.0dcc4dae.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.048b5357.css",
+    "static/js/main.0dcc4dae.js"
+  ]
+}

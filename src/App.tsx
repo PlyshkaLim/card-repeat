@@ -34,7 +34,7 @@ type CardListType = {
 }
 
 const App: React.FC = () => {
-  const [cardBase, setCardBase] = useState<any[]>(loadState('CardBase', []));
+  const [cardBase, setCardBase] = useState<CardListType[]>(loadState('CardBase', []));
   const [currentListId, setCurrentListId] = useState<number>(0);
 
   function loadState(key: string, defaultValue: any) {
